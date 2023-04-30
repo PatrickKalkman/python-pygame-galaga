@@ -1,4 +1,4 @@
-﻿from typing import Tuple, Any, Literal
+from typing import Tuple, Any, Literal
 
 from bezier.control_point import ControlPoint
 from .control_point_quartet import ControlPointQuartet
