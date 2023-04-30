@@ -1,2 +1,8 @@
 # python-pygame-galaga
-A repository to hold all the example that go with a Medium article about creating a galaga clone using Pygame
+[![Python CI](https://github.com/PatrickKalkman/python-pygame-gala/actions/workflows/main.yaml/badge.svg)](https://github.com/PatrickKalkman/python-pygame-gala/actions/workflows/main.yaml)
+
+Repository that contains the examples of a [Medium article](https://medium.com/@pkalkman) creating a galaga clone using Python and Pygame.
+
+![Creating a galaga clone using Python and PyGame](/arcade.jpg "Creating a galaga clone using Python and PyGame")
+
+![Creating a galaga clone using Python and PyGame](/game.gif "Creating a galaga clone using Python and PyGame")
