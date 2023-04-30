@@ -13,7 +13,7 @@ class Splash(BaseState):
             center=self.screen_rect.center
         )
         self.next_state = "MENU"
-        self.time_active = 0
+        self.time_active: float = 0
 
     def update(self, dt: float) -> None:
         self.time_active += dt

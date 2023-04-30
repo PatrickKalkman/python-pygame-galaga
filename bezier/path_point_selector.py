@@ -18,13 +18,8 @@ class PathPointSelector:
     def create_key(self, quartet_index: int, control_point_index: int) -> str:
         return f"Q{quartet_index}/P{control_point_index}"
 
-    def is_path_point(
-        self, control_point_handler: ControlPointHandler
-    ) -> bool:
-        if (
-            control_point_handler.control_point_index == 0
-            or control_point_handler.control_point_index == 3
-        ):
+    def is_path_point(self, cph: ControlPointHandler) -> bool:
+        if cph.control_point_index == 0 or cph.control_point_index == 3:
             return True
         return False
 
@@ -113,48 +108,39 @@ class PathPointSelector:
         return related_control_point
 
     def find_control_points_of_path_point(
-        self, path_point_handler: ControlPointHandler
+        self, pp_handler: ControlPointHandler
     ) -> list[ControlPointHandler]:
         related_control_points: list[ControlPointHandler] = []
         number_of_quartets: int = self.cpqc.number_of_quartets()
         last_quartet_index: int = number_of_quartets - 1
 
-        if path_point_handler.control_point_index == 0:
+        if pp_handler.control_point_index == 0:
             related_control_points.append(
-                ControlPointHandler(path_point_handler.quartet_index, 1)
+                ControlPointHandler(pp_handler.quartet_index, 1)
             )
-            if path_point_handler.quartet_index == 0:
+            if pp_handler.quartet_index == 0:
                 related_control_points.append(
                     ControlPointHandler(last_quartet_index, 2)
                 )
             else:
                 related_control_points.append(
-                    ControlPointHandler(
-                        path_point_handler.quartet_index - 1, 2
-                    )
+                    ControlPointHandler(pp_handler.quartet_index - 1, 2)
                 )
 
-        elif path_point_handler.control_point_index == 3:
+        elif pp_handler.control_point_index == 3:
             related_control_points.append(
-                ControlPointHandler(path_point_handler.quartet_index, 2)
+                ControlPointHandler(pp_handler.quartet_index, 2)
             )
-            if (
-                path_point_handler.quartet_index == 0
-                and number_of_quartets > 1
-            ):
+            if pp_handler.quartet_index == 0 and number_of_quartets > 1:
                 related_control_points.append(
-                    ControlPointHandler(
-                        path_point_handler.quartet_index + 1, 1
-                    )
+                    ControlPointHandler(pp_handler.quartet_index + 1, 1)
                 )
             else:
-                if path_point_handler.quartet_index == last_quartet_index:
+                if pp_handler.quartet_index == last_quartet_index:
                     related_control_points.append(ControlPointHandler(0, 1))
                 else:
                     related_control_points.append(
-                        ControlPointHandler(
-                            path_point_handler.quartet_index + 1, 1
-                        )
+                        ControlPointHandler(pp_handler.quartet_index + 1, 1)
                     )
         else:
             print("error")
@@ -162,12 +148,16 @@ class PathPointSelector:
 
         return related_control_points
 
-    def get_control_point_pairs(self):
+    def get_control_point_pairs(
+        self,
+    ) -> list[Tuple[Tuple[float, float], Tuple[float, float]]]:
         line_list: list[Tuple[Tuple[float, float], Tuple[float, float]]] = []
 
-        control_point1 = self.cpqc.get_control_point(ControlPointHandler(0, 1))
+        control_point1: ControlPoint = self.cpqc.get_control_point(
+            ControlPointHandler(0, 1)
+        )
         last_quartet_index: int = self.get_last_quartet_index()
-        control_point2 = self.cpqc.get_control_point(
+        control_point2: ControlPoint = self.cpqc.get_control_point(
             ControlPointHandler(last_quartet_index, 2)
         )
         line_list.append(
@@ -179,10 +169,10 @@ class PathPointSelector:
 
         if self.get_number_of_quartets() > 1:
             for index in range(last_quartet_index):
-                control_point1: ControlPoint = self.cpqc.get_control_point(
+                control_point1 = self.cpqc.get_control_point(
                     ControlPointHandler(index, 2)
                 )
-                control_point2: ControlPoint = self.cpqc.get_control_point(
+                control_point2 = self.cpqc.get_control_point(
                     ControlPointHandler(index + 1, 1)
                 )
                 line_list.append(

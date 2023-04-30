@@ -34,7 +34,7 @@ class ControlPointSprite(pygame.sprite.Sprite):
         )
         self.image: pygame.Surface = self.original_image
         self.rect: pygame.Rect = self.image.get_rect(center=(x, y))
-        self.selected = False
+        self.selected: bool = False
 
     def get_event(self, event: pygame.event.Event) -> None:
         pass
@@ -42,7 +42,7 @@ class ControlPointSprite(pygame.sprite.Sprite):
     def update(self, *args: Any, **kwargs: Any) -> None:
         mouse_pos: Tuple[int, int] = pygame.mouse.get_pos()
         mouse_buttons: Tuple[bool, bool, bool] = pygame.mouse.get_pressed()
-        self.selected: bool = self.rect.collidepoint(mouse_pos) and any(
+        self.selected = self.rect.collidepoint(mouse_pos) and any(
             mouse_buttons
         )
         self.image = (

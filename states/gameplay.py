@@ -81,10 +81,10 @@ class Gameplay(BaseState):
             "./assets/sounds/13 Fighter Shot1.mp3"
         )
         self.kill_sound = pygame.mixer.Sound("./assets/sounds/kill.mp3")
-        self.show_control = False
+        self.show_control: bool = False
         self.mover.align_all()
 
-    def startup(self):
+    def startup(self) -> None:
         pygame.mixer.music.load("./assets/sounds/02 Start Music.mp3")
         pygame.mixer.music.play()
         self.player = Player(self.sprites, 0, 0)
@@ -149,7 +149,7 @@ class Gameplay(BaseState):
                 self.control_points1.save_control_points()
                 self.done = True
             if event.key == pygame.K_s:
-                self.show_control: bool = not self.show_control
+                self.show_control = not self.show_control
             if event.key == pygame.K_SPACE:
                 if len(self.all_rockets) < 2:
                     self.shoot_rocket()
@@ -179,18 +179,18 @@ class Gameplay(BaseState):
         nr_of_enemies: int = len(self.all_enemies)
         if nr_of_enemies > 0:
             enemy_index: int = random.randint(0, nr_of_enemies - 1)
-            start_rocket = None
+            start_rocket: Tuple[int, int] | None = None
             for index, enemy in enumerate(self.all_enemies):
                 if index == enemy_index:
                     start_rocket = enemy.rect.center
 
-            if start_rocket[1] < 400:
+            if start_rocket is not None and start_rocket[1] < 400:
                 ySpeed = 7
                 dx = self.player.rect.centerx - start_rocket[0]
                 dy = self.player.rect.centery - start_rocket[1]
 
-                number_of_steps = dy / ySpeed
-                xSpeed = dx / number_of_steps
+                number_of_steps: float = dy / ySpeed
+                xSpeed: int = int(dx / number_of_steps)
 
                 rocket = Rocket(self.sprites, xSpeed, ySpeed)
                 rocket.rect.centerx = start_rocket[0]
@@ -267,7 +267,7 @@ class Gameplay(BaseState):
 
     def drawPath(self, screen: pygame.Surface) -> None:
         calculator = PathPointCalculator()
-        bezier_timer = 0
+        bezier_timer: float = 0
         previous_path_point: Optional[PathPoint] = None
         while bezier_timer < self.control_points1.number_of_quartets():
             control_point_index = int(bezier_timer)
@@ -276,7 +276,7 @@ class Gameplay(BaseState):
                 bezier_timer,
             )
             if previous_path_point is None:
-                previous_path_point: PathPoint = path_point
+                previous_path_point = path_point
 
             pygame.draw.line(
                 screen,

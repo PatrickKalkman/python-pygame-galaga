@@ -28,19 +28,19 @@ class Enemy(pygame.sprite.Sprite):
         self.sprite_index_count: int = 1
 
         if enemy == 0:
-            self.number_of_images = 7
+            self.nr_images = 7
             rect1: Tuple[int, int, int, int] = (0, 199, 48, 40)
             self.images: List[pygame.Surface] = sprites.load_strip(
-                rect1, self.number_of_images, -1
+                rect1, self.nr_images, -1
             )
         elif enemy == 1:
-            self.number_of_images = 4
+            self.nr_images = 4
             rect1 = (0, 248, 48, 40)
-            self.images = sprites.load_strip(rect1, self.number_of_images, -1)
+            self.images = sprites.load_strip(rect1, self.nr_images, -1)
         elif enemy == 2:
-            self.number_of_images = 4
+            self.nr_images = 4
             rect1 = (0, 62, 64, 66)
-            self.images = sprites.load_strip(rect1, self.number_of_images, -1)
+            self.images = sprites.load_strip(rect1, self.nr_images, -1)
 
         self.surf: pygame.Surface = self.images[0]
         self.rect: pygame.Rect = self.surf.get_rect(
@@ -86,10 +86,7 @@ class Enemy(pygame.sprite.Sprite):
     def get_surf(self) -> pygame.Surface:
         if self.timer % self.interval == 0:
             self.image_index += self.sprite_index_count
-            if (
-                self.image_index == self.number_of_images - 1
-                or self.image_index == 0
-            ):
+            if self.image_index == self.nr_images - 1 or self.image_index == 0:
                 self.sprite_index_count = -self.sprite_index_count
 
         rot_image: pygame.Surface = pygame.transform.rotate(

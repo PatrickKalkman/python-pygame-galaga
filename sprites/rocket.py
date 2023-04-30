@@ -14,7 +14,7 @@ class Rocket(pygame.sprite.Sprite):
         self.ySpeed: int = ySpeed
         self.xSpeed: int = xSpeed
         self.images: List[pygame.Surface] = sprites.load_strip(
-            tuple([0, 177, 12, 14]), self.number_of_images, -1
+            (0, 177, 12, 14), self.number_of_images, -1
         )
 
         self.surf: pygame.Surface = self.images[1]
