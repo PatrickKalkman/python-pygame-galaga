@@ -20,12 +20,12 @@ class Enemy(pygame.sprite.Sprite):
         enemy: int,
     ) -> None:
         super(Enemy, self).__init__()
-        self.rotation = 0
+        self.rotation: float = 0
         self.timer = 0
         self.control_points: ControlPointQuartetCollection = control_points
         self.bezier_timer = 0.0
-        self.interval = 2
-        self.sprite_index_count = 1
+        self.interval: int = 2
+        self.sprite_index_count: int = 1
 
         if enemy == 0:
             self.number_of_images = 7
@@ -35,15 +35,15 @@ class Enemy(pygame.sprite.Sprite):
             )
         elif enemy == 1:
             self.number_of_images = 4
-            rect1: Tuple[int, int, int, int] = (0, 248, 48, 40)
+            rect1 = (0, 248, 48, 40)
             self.images = sprites.load_strip(rect1, self.number_of_images, -1)
         elif enemy == 2:
             self.number_of_images = 4
-            rect1: Tuple[int, int, int, int] = (0, 62, 64, 66)
+            rect1 = (0, 62, 64, 66)
             self.images = sprites.load_strip(rect1, self.number_of_images, -1)
 
         self.surf: pygame.Surface = self.images[0]
-        self.rect = self.surf.get_rect(
+        self.rect: pygame.Rect = self.surf.get_rect(
             center=(constants.SCREEN_WIDTH / 2, constants.SCREEN_HEIGHT - 20)
         )
         self.image_index = 0
@@ -63,7 +63,7 @@ class Enemy(pygame.sprite.Sprite):
         if self.previous_point is None:
             self.previous_point = path_point
 
-        self.rotation: float = self.calculate_rotation(
+        self.rotation = self.calculate_rotation(
             self.previous_point, path_point
         )
         self.previous_point = path_point
@@ -71,10 +71,8 @@ class Enemy(pygame.sprite.Sprite):
         self.rect.centery = int(path_point.ypos)
         self.timer += 1
         self.bezier_timer += 0.012
-        if (
-            int(self.bezier_timer)
-            > self.control_points.number_of_quartets() - 1
-        ):
+        timer = int(self.bezier_timer)
+        if timer > self.control_points.number_of_quartets() - 1:
             self.kill()
 
     def calculate_rotation(
@@ -92,11 +90,11 @@ class Enemy(pygame.sprite.Sprite):
                 self.image_index == self.number_of_images - 1
                 or self.image_index == 0
             ):
-                self.sprite_index_count: int = -self.sprite_index_count
+                self.sprite_index_count = -self.sprite_index_count
 
         rot_image: pygame.Surface = pygame.transform.rotate(
             self.images[self.image_index], self.rotation
         )
-        self.rect: pygame.Rect = rot_image.get_rect(center=self.rect.center)
+        self.rect = rot_image.get_rect(center=self.rect.center)
 
         return rot_image

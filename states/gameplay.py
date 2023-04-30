@@ -1,4 +1,4 @@
-from typing import Optional
+from typing import Optional, Tuple
 import pygame
 import random
 from bezier.control_point import ControlPoint
@@ -8,7 +8,7 @@ from bezier.control_point_quartet_collection import (
     ControlPointQuartetCollection,
 )
 from bezier.path_point import PathPoint
-from sprites.control_point import ControlPointSprite
+from sprites.control_point_sprite import ControlPointSprite
 import spritesheet
 import constants
 from starfield import StarField
@@ -201,7 +201,7 @@ class Gameplay(BaseState):
 
     def draw(self, screen: pygame.Surface) -> None:
         self.starfield.render(screen)
-        pressed_keys: ScancodeWrapper = pygame.key.get_pressed()
+        pressed_keys: Tuple[bool, ...] = pygame.key.get_pressed()
         for entity in self.all_sprites:
             entity.update(pressed_keys)
 

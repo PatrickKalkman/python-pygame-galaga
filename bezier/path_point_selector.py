@@ -10,7 +10,7 @@ class PathPointSelector:
     def __init__(
         self, control_point_quartet_collection: ControlPointQuartetCollection
     ) -> None:
-        self.control_point_quartet_collection: ControlPointQuartetCollection = (
+        self.cpqc: ControlPointQuartetCollection = (
             control_point_quartet_collection
         )
         self.path_point_mapping: dict[str, ControlPointHandler] = {}
@@ -29,20 +29,18 @@ class PathPointSelector:
         return False
 
     def create_path_point_mapping(self) -> None:
-        nr_quartets: int = (
-            self.control_point_quartet_collection.number_of_quartets()
-        )
+        nr_quartets: int = self.cpqc.number_of_quartets()
 
         for index in range(nr_quartets):
-            mapped_first_quartet_index = 0
+            mapped_first_quartet_index: int = 0
             if index == 0:
-                mapped_first_quartet_index: int = nr_quartets - 1
+                mapped_first_quartet_index = nr_quartets - 1
             else:
                 mapped_first_quartet_index = index - 1
 
-            mapped_last_quartet_index = 0
+            mapped_last_quartet_index: int = 0
             if index < nr_quartets - 1:
-                mapped_last_quartet_index: int = index + 1
+                mapped_last_quartet_index = index + 1
             else:
                 mapped_last_quartet_index = 0
 
@@ -70,9 +68,7 @@ class PathPointSelector:
         self, control_point_handler: ControlPointHandler
     ) -> ControlPointHandler:
         related_control_point = ControlPointHandler(-1, -1)
-        last_quartet_index: int = (
-            self.control_point_quartet_collection.number_of_quartets() - 1
-        )
+        last_quartet_index: int = self.cpqc.number_of_quartets() - 1
 
         if control_point_handler.control_point_index == 1:
             related_control_point.control_point_index = 2
@@ -95,10 +91,10 @@ class PathPointSelector:
         return related_control_point
 
     def get_last_quartet_index(self) -> int:
-        return self.control_point_quartet_collection.number_of_quartets() - 1
+        return self.cpqc.number_of_quartets() - 1
 
     def get_number_of_quartets(self) -> int:
-        return self.control_point_quartet_collection.number_of_quartets()
+        return self.cpqc.number_of_quartets()
 
     def find_path_point_of_control_point(
         self, control_point_handler: ControlPointHandler
@@ -120,9 +116,7 @@ class PathPointSelector:
         self, path_point_handler: ControlPointHandler
     ) -> list[ControlPointHandler]:
         related_control_points: list[ControlPointHandler] = []
-        number_of_quartets: int = (
-            self.control_point_quartet_collection.number_of_quartets()
-        )
+        number_of_quartets: int = self.cpqc.number_of_quartets()
         last_quartet_index: int = number_of_quartets - 1
 
         if path_point_handler.control_point_index == 0:
@@ -171,16 +165,10 @@ class PathPointSelector:
     def get_control_point_pairs(self):
         line_list: list[Tuple[Tuple[float, float], Tuple[float, float]]] = []
 
-        control_point1 = (
-            self.control_point_quartet_collection.get_control_point(
-                ControlPointHandler(0, 1)
-            )
-        )
+        control_point1 = self.cpqc.get_control_point(ControlPointHandler(0, 1))
         last_quartet_index: int = self.get_last_quartet_index()
-        control_point2 = (
-            self.control_point_quartet_collection.get_control_point(
-                ControlPointHandler(last_quartet_index, 2)
-            )
+        control_point2 = self.cpqc.get_control_point(
+            ControlPointHandler(last_quartet_index, 2)
         )
         line_list.append(
             (
@@ -191,15 +179,11 @@ class PathPointSelector:
 
         if self.get_number_of_quartets() > 1:
             for index in range(last_quartet_index):
-                control_point1: ControlPoint = (
-                    self.control_point_quartet_collection.get_control_point(
-                        ControlPointHandler(index, 2)
-                    )
+                control_point1: ControlPoint = self.cpqc.get_control_point(
+                    ControlPointHandler(index, 2)
                 )
-                control_point2: ControlPoint = (
-                    self.control_point_quartet_collection.get_control_point(
-                        ControlPointHandler(index + 1, 1)
-                    )
+                control_point2: ControlPoint = self.cpqc.get_control_point(
+                    ControlPointHandler(index + 1, 1)
                 )
                 line_list.append(
                     (

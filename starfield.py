@@ -39,7 +39,7 @@ class StarField:
             if new_y > constants.SCREEN_HEIGHT:
                 star_x: int = random.randrange(0, constants.SCREEN_WIDTH)
                 star_y: int = random.randrange(-20, -5)
-                star: Tuple[int, int] = (star_x, star_y)
+                star = (star_x, star_y)
             else:
                 star = (star[0], new_y)
             star_collection[i] = star
