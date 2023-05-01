@@ -1,5 +1,8 @@
-from typing import Optional, Tuple
+# type: ignore
+
+from typing import Any, Dict, List, Optional, Tuple
 import pygame
+from pygame.sprite import Group
 import random
 from bezier.control_point import ControlPoint
 
@@ -8,7 +11,6 @@ from bezier.control_point_quartet_collection import (
     ControlPointQuartetCollection,
 )
 from bezier.path_point import PathPoint
-from sprites.control_point_sprite import ControlPointSprite
 import spritesheet
 import constants
 from starfield import StarField
@@ -18,6 +20,7 @@ from sprites.player import Player
 from sprites.rocket import Rocket
 from sprites.enemy import Enemy
 from sprites.explosion import Explosion
+from sprites.control_point_sprite import ControlPointSprite
 
 from bezier.control_point_collection_factory import (
     ControlPointCollectionFactory,
@@ -62,7 +65,7 @@ class Gameplay(BaseState):
         self.mover = ControlHandlerMover(
             self.control_points1, self.path_point_selector
         )
-        self.control_sprites = pygame.sprite.Group()
+        self.control_sprites: Group = pygame.sprite.Group()
         self.add_control_points()
         self.player = Player(self.sprites, 0, 0)
         self.all_sprites = pygame.sprite.Group()
@@ -186,8 +189,8 @@ class Gameplay(BaseState):
 
             if start_rocket is not None and start_rocket[1] < 400:
                 ySpeed = 7
-                dx = self.player.rect.centerx - start_rocket[0]
-                dy = self.player.rect.centery - start_rocket[1]
+                dx: int = self.player.rect.centerx - start_rocket[0]
+                dy: int = self.player.rect.centery - start_rocket[1]
 
                 number_of_steps: float = dy / ySpeed
                 xSpeed: int = int(dx / number_of_steps)
@@ -220,9 +223,10 @@ class Gameplay(BaseState):
 
         self.draw_score(screen)
 
-        result = pygame.sprite.groupcollide(
+        result: Dict[Any, List[Any]] = pygame.sprite.groupcollide(
             self.all_rockets, self.all_enemies, True, True
         )
+
         if result:
             for key in result:
                 self.score += 120
