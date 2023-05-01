@@ -3,7 +3,7 @@ import pygame
 
 from states.base_state import BaseState
 from states.menu import Menu
-from states.gameplay import Gameplay
+from states.gameplay import Gameplay  # type: ignore
 from states.game_over import GameOver
 from states.splash import Splash
 from game import Game
