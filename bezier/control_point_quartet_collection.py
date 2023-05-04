@@ -38,9 +38,7 @@ class ControlPointQuartetCollection:
     ) -> ControlPoint:
         quartet_index: int = control_point_handler.quartet_index
         control_point_index: int = control_point_handler.control_point_index
-        return self.control_point_quartets[quartet_index].points[
-            control_point_index
-        ]
+        return self.control_point_quartets[quartet_index].points[control_point_index]
 
     def save_control_points(self) -> None:
         with open("control_points.txt", "w") as file:

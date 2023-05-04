@@ -21,11 +21,7 @@ class PathPointCalculator:
         cube: float = time * time * time
         square: float = time * time
 
-        resx: float = (
-            (ax * cube) + (bx * square) + (cx * time) + cpq.get_point(0).x
-        )
-        resy: float = (
-            (ay * cube) + (by * square) + (cy * time) + cpq.get_point(0).y
-        )
+        resx: float = (ax * cube) + (bx * square) + (cx * time) + cpq.get_point(0).x
+        resy: float = (ay * cube) + (by * square) + (cy * time) + cpq.get_point(0).y
 
         return PathPoint(resx, resy)

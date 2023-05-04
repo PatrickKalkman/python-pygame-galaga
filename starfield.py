@@ -46,12 +46,6 @@ class StarField:
             pygame.draw.circle(screen, color, star, size)
 
     def render(self, screen: pygame.Surface) -> None:
-        self._render_star_layer(
-            screen, self.star_field_slow, 1, 3, self.DARKGREY
-        )
-        self._render_star_layer(
-            screen, self.star_field_medium, 4, 2, self.LIGHTGREY
-        )
-        self._render_star_layer(
-            screen, self.star_field_fast, 8, 1, self.YELLOW
-        )
+        self._render_star_layer(screen, self.star_field_slow, 1, 3, self.DARKGREY)
+        self._render_star_layer(screen, self.star_field_medium, 4, 2, self.LIGHTGREY)
+        self._render_star_layer(screen, self.star_field_fast, 8, 1, self.YELLOW)

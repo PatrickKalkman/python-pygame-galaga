@@ -6,12 +6,8 @@ from .base_state import BaseState
 class Splash(BaseState):
     def __init__(self) -> None:
         super(Splash, self).__init__()
-        self.title: Surface = self.font.render(
-            "Galaga", True, pygame.Color("blue")
-        )
-        self.title_rect: Rect = self.title.get_rect(
-            center=self.screen_rect.center
-        )
+        self.title: Surface = self.font.render("Galaga", True, pygame.Color("blue"))
+        self.title_rect: Rect = self.title.get_rect(center=self.screen_rect.center)
         self.next_state = "MENU"
         self.time_active: float = 0
 

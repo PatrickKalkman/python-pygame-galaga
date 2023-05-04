@@ -63,9 +63,7 @@ class Enemy(pygame.sprite.Sprite):
         if self.previous_point is None:
             self.previous_point = path_point
 
-        self.rotation = self.calculate_rotation(
-            self.previous_point, path_point
-        )
+        self.rotation = self.calculate_rotation(self.previous_point, path_point)
         self.previous_point = path_point
         self.rect.centerx = int(path_point.xpos)
         self.rect.centery = int(path_point.ypos)

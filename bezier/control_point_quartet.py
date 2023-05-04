@@ -27,9 +27,7 @@ class ControlPointQuartet:
     def length(self) -> int:
         return len(self.points)
 
-    def is_in_control_point(
-        self, x: float, y: float, radius: float
-    ) -> Tuple[int, bool]:
+    def is_in_control_point(self, x: float, y: float, radius: float) -> Tuple[int, bool]:
         for index, point in enumerate(self.points):
             distance_squared: float = (point.x - x) ** 2 + (point.y - y) ** 2
 
