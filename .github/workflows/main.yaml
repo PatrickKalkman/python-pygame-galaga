@@ -34,20 +34,15 @@ jobs:
     - name: Run pyright
       uses: jakebailey/pyright-action@v1.5.1
 
-    - name: Security check - Bandit
-      uses: ./
-      with:
-        python_version: 3.11.3
-        project_path: .
-        ignore_failure: true
-
-    - name: Security check report artifacts
-      uses: actions/upload-artifact@v1
-      # if: failure()
-      with:
-        name: Security report
-        path: output/security_report.txt
-
     - name: Run pytest
       run: |
         pytest        
+
+    - name: Run bandit
+      uses: mdegis/bandit-action@v1
+      with: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        path: "."
+        level: high
+        confidence: high
+        exit_zero: true
