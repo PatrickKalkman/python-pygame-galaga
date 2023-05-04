@@ -25,16 +25,15 @@ jobs:
     - name: Install dependencies
       run: |
         python3 -m pip install --upgrade pip
-        python3 -m pip install flake8 mypy pytest
-        python3 -m pip install pygame
+        python3 -m pip install flake8 bandit pyright pytest 
+        pip install -r requirements.txt
 
     - name: Run flake8
       run: |
         flake8 .
 
-    - name: Run mypy
-      run: |
-        mypy . --check-untyped-defs --no-warn-unused-ignores
+    - name: Run pyright
+      uses: jakebailey/pyright-action@v1.5.1
 
     - name: Run pytest
       run: |
