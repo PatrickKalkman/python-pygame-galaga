@@ -39,7 +39,7 @@ jobs:
         pytest        
 
     - name: Run bandit
-      uses: mdegis/bandit-action@v1
+      uses: mdegis/bandit-action
       with: 
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         path: "."
