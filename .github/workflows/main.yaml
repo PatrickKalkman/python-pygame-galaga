@@ -41,4 +41,4 @@ jobs:
     - name: Run Bandit Report
       uses: jpetrucciani/bandit-check@main
       with:
-        path: '.'
+        bandit_flags: '-lll -o output.json -f json'
