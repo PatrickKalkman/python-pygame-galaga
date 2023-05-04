@@ -10,9 +10,7 @@ class PathPointSelector:
     def __init__(
         self, control_point_quartet_collection: ControlPointQuartetCollection
     ) -> None:
-        self.cpqc: ControlPointQuartetCollection = (
-            control_point_quartet_collection
-        )
+        self.cpqc: ControlPointQuartetCollection = control_point_quartet_collection
         self.path_point_mapping: dict[str, ControlPointHandler] = {}
 
     def create_key(self, quartet_index: int, control_point_index: int) -> str:
@@ -39,12 +37,12 @@ class PathPointSelector:
             else:
                 mapped_last_quartet_index = 0
 
-            self.path_point_mapping[
-                self.create_key(index, 0)
-            ] = ControlPointHandler(mapped_first_quartet_index, 3)
-            self.path_point_mapping[
-                self.create_key(index, 3)
-            ] = ControlPointHandler(mapped_last_quartet_index, 0)
+            self.path_point_mapping[self.create_key(index, 0)] = ControlPointHandler(
+                mapped_first_quartet_index, 3
+            )
+            self.path_point_mapping[self.create_key(index, 3)] = ControlPointHandler(
+                mapped_last_quartet_index, 0
+            )
 
     def find_related_path_point(
         self, control_point_handler: ControlPointHandler
@@ -101,9 +99,7 @@ class PathPointSelector:
         elif control_point_handler.control_point_index == 2:
             related_control_point.control_point_index = 3
 
-        related_control_point.quartet_index = (
-            control_point_handler.quartet_index
-        )
+        related_control_point.quartet_index = control_point_handler.quartet_index
 
         return related_control_point
 
@@ -119,9 +115,7 @@ class PathPointSelector:
                 ControlPointHandler(pp_handler.quartet_index, 1)
             )
             if pp_handler.quartet_index == 0:
-                related_control_points.append(
-                    ControlPointHandler(last_quartet_index, 2)
-                )
+                related_control_points.append(ControlPointHandler(last_quartet_index, 2))
             else:
                 related_control_points.append(
                     ControlPointHandler(pp_handler.quartet_index - 1, 2)

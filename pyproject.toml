@@ -4,7 +4,7 @@ version = "1.0.0"
 authors = [
   { name="Patrick Kalkman", email="patrick@simpletechture.nl" },
 ]
-description = "Retentioneering is a powerful Python library for user retention analysis. It provides a simple and intuitive interface for tracking user behavior, analyzing data, and gaining valuable insights into your users."
+description = "A Galaga clone written in Python using Pygame."
 readme = "README.md"
 
 [tool.black]

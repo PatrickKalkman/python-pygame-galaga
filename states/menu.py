@@ -12,9 +12,7 @@ class Menu(BaseState):
 
     def render_text(self, index: int) -> pygame.Surface:
         color: pygame.Color = (
-            pygame.Color("red")
-            if index == self.active_index
-            else pygame.Color("white")
+            pygame.Color("red") if index == self.active_index else pygame.Color("white")
         )
         return self.font.render(self.options[index], True, color)
 
@@ -46,6 +44,4 @@ class Menu(BaseState):
         surface.fill(pygame.Color("black"))
         for index, _ in enumerate(self.options):
             text_render: Surface = self.render_text(index)
-            surface.blit(
-                text_render, self.get_text_position(text_render, index)
-            )
+            surface.blit(text_render, self.get_text_position(text_render, index))

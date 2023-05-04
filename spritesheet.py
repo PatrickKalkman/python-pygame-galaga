@@ -44,7 +44,6 @@ class SpriteSheet:
     ) -> List[Surface]:
         """Load a whole strip of images, and return them as a list."""
         tups: list[tuple[int, int, int, int]] = [
-            (rect[0] + rect[2] * x, rect[1], rect[2], rect[3])
-            for x in range(image_count)
+            (rect[0] + rect[2] * x, rect[1], rect[2], rect[3]) for x in range(image_count)
         ]
         return self.images_at(tups, colorkey)

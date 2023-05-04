@@ -10,9 +10,7 @@ class ControlHandlerMover:
         control_point_quartet_collection: ControlPointQuartetCollection,
         path_point_selector: PathPointSelector,
     ) -> None:
-        self.cpqc: ControlPointQuartetCollection = (
-            control_point_quartet_collection
-        )
+        self.cpqc: ControlPointQuartetCollection = control_point_quartet_collection
         self.path_point_selector: PathPointSelector = path_point_selector
 
     def move_control_handler(
@@ -26,9 +24,7 @@ class ControlHandlerMover:
 
         if self.path_point_selector.is_path_point(control_point_handler):
             related_path_point: ControlPointHandler = (
-                self.path_point_selector.find_related_path_point(
-                    control_point_handler
-                )
+                self.path_point_selector.find_related_path_point(control_point_handler)
             )
             self.cpqc.get_control_point(related_path_point).x = x
             self.cpqc.get_control_point(related_path_point).y = y
@@ -45,9 +41,7 @@ class ControlHandlerMover:
 
         else:  # It is a control point
             related_control_point: ControlPointHandler = (
-                self.path_point_selector.find_related_control_point(
-                    control_point_handler
-                )
+                self.path_point_selector.find_related_control_point(control_point_handler)
             )
             related_path_point = (
                 self.path_point_selector.find_path_point_of_control_point(
@@ -55,12 +49,8 @@ class ControlHandlerMover:
                 )
             )
 
-            xDistance: float = (
-                self.cpqc.get_control_point(related_path_point).x - x
-            )
-            yDistance: float = (
-                self.cpqc.get_control_point(related_path_point).y - y
-            )
+            xDistance: float = self.cpqc.get_control_point(related_path_point).x - x
+            yDistance: float = self.cpqc.get_control_point(related_path_point).y - y
 
             self.cpqc.get_control_point(related_control_point).x = (
                 self.cpqc.get_control_point(related_path_point).x + xDistance
@@ -87,9 +77,7 @@ class ControlHandlerMover:
         for quartet_index in range(self.cpqc.number_of_quartets()):
             quartet: ControlPointQuartet = self.cpqc.get_quartet(quartet_index)
             for point_index in range(4):
-                control_point_handler = ControlPointHandler(
-                    quartet_index, point_index
-                )
+                control_point_handler = ControlPointHandler(quartet_index, point_index)
                 point = quartet.get_point(point_index)
                 self.move_control_handler(
                     control_point_handler, int(point.x), int(point.y)

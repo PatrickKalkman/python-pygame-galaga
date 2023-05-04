@@ -44,9 +44,7 @@ class Gameplay(BaseState):
         self.rect = pygame.Rect((0, 0), (80, 80))
         self.next_state = "GAME_OVER"
         self.sprites = spritesheet.SpriteSheet(constants.SPRITE_SHEET)
-        self.explosion_sprites = spritesheet.SpriteSheet(
-            constants.SPRITE_SHEET_EXPLOSION
-        )
+        self.explosion_sprites = spritesheet.SpriteSheet(constants.SPRITE_SHEET_EXPLOSION)
         self.starfield = StarField()
         self.control_points1: ControlPointQuartetCollection = (
             ControlPointCollectionFactory.create_collection1()
@@ -62,9 +60,7 @@ class Gameplay(BaseState):
         )
         self.path_point_selector = PathPointSelector(self.control_points1)
         self.path_point_selector.create_path_point_mapping()
-        self.mover = ControlHandlerMover(
-            self.control_points1, self.path_point_selector
-        )
+        self.mover = ControlHandlerMover(self.control_points1, self.path_point_selector)
         self.control_sprites: Group = pygame.sprite.Group()
         self.add_control_points()
         self.player = Player(self.sprites, 0, 0)
@@ -80,9 +76,7 @@ class Gameplay(BaseState):
         self.all_enemies = pygame.sprite.Group()
         self.all_rockets = pygame.sprite.Group()
         self.enemy_rockets = pygame.sprite.Group()
-        self.shoot_sound = pygame.mixer.Sound(
-            "./assets/sounds/13 Fighter Shot1.mp3"
-        )
+        self.shoot_sound = pygame.mixer.Sound("./assets/sounds/13 Fighter Shot1.mp3")
         self.kill_sound = pygame.mixer.Sound("./assets/sounds/kill.mp3")
         self.show_control: bool = False
         self.mover.align_all()
@@ -102,9 +96,7 @@ class Gameplay(BaseState):
         self.all_enemies = pygame.sprite.Group()
         self.all_rockets = pygame.sprite.Group()
         self.enemy_rockets = pygame.sprite.Group()
-        self.shoot_sound = pygame.mixer.Sound(
-            "./assets/sounds/13 Fighter Shot1.mp3"
-        )
+        self.shoot_sound = pygame.mixer.Sound("./assets/sounds/13 Fighter Shot1.mp3")
         self.kill_sound = pygame.mixer.Sound("./assets/sounds/kill.mp3")
         self.show_control = False
         self.mover.align_all()
@@ -112,8 +104,8 @@ class Gameplay(BaseState):
     def add_control_points(self) -> None:
         for quartet_index in range(self.control_points1.number_of_quartets()):
             for point_index in range(4):
-                quartet: ControlPointQuartet = (
-                    self.control_points1.get_quartet(quartet_index)
+                quartet: ControlPointQuartet = self.control_points1.get_quartet(
+                    quartet_index
                 )
                 point: ControlPoint = quartet.get_point(point_index)
                 self.control_sprites.add(
@@ -237,14 +229,10 @@ class Gameplay(BaseState):
                 )
                 self.kill_sound.play()
 
-        result = pygame.sprite.spritecollideany(
-            self.player, self.enemy_rockets
-        )
+        result = pygame.sprite.spritecollideany(self.player, self.enemy_rockets)
         if result:
             self.all_sprites.add(
-                Explosion(
-                    self.explosion_sprites, result.rect[0], result.rect[1]
-                )
+                Explosion(self.explosion_sprites, result.rect[0], result.rect[1])
             )
             self.all_sprites.add(
                 Explosion(
@@ -261,9 +249,7 @@ class Gameplay(BaseState):
                 )
             )
             self.all_sprites.add(
-                Explosion(
-                    self.explosion_sprites, result.rect[0], result.rect[1] - 30
-                )
+                Explosion(self.explosion_sprites, result.rect[0], result.rect[1] - 30)
             )
             self.kill_sound.play()
             self.freeze = True

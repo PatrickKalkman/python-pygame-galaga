@@ -6,12 +6,8 @@ from .base_state import BaseState
 class GameOver(BaseState):
     def __init__(self) -> None:
         super(GameOver, self).__init__()
-        self.title: Surface = self.font.render(
-            "Game Over", True, pygame.Color("white")
-        )
-        self.title_rect: Rect = self.title.get_rect(
-            center=self.screen_rect.center
-        )
+        self.title: Surface = self.font.render("Game Over", True, pygame.Color("white"))
+        self.title_rect: Rect = self.title.get_rect(center=self.screen_rect.center)
         self.instructions: Surface = self.font.render(
             "Press R to start again, or enter to go to the menu",
             True,
