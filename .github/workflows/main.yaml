@@ -38,11 +38,11 @@ jobs:
       run: |
         pytest        
 
-    - name: Run bandit
-      uses: mdegis/bandit-action
-      with: 
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        path: "."
-        level: high
-        confidence: high
-        exit_zero: true
+    - name: Run Bandit Report
+      uses: libertyy/py3-bandit-check@v2
+      
+    - name: Save Bandit txt Report
+      if: ${{ always() }}
+      uses: actions/upload-artifact@v2
+      with:
+        path: ${{ RUNNER.temp }}/_github_home/bandit_report.out
