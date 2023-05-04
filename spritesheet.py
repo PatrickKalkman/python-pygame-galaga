@@ -4,7 +4,7 @@ from pygame import Color, Surface
 
 
 class SpriteSheet:
-    def __init__(self, filename: str) -> None:
+    def __init__(self, filename) -> None:
         """Load the sheet."""
         try:
             self.sheet: Surface = pygame.image.load(filename).convert_alpha()
