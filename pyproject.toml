@@ -1,0 +1,25 @@
+[tool.black]
+line-length = 90
+
+[tool.pyright]
+useLibraryCodeForTypes = false
+typeCheckingMode = 'strict'
+stubPath = './typings'
+exclude = [
+    '**/__init__.py',
+    './typings',
+    ]
+strictListInference = true
+strictDictionaryInference = true
+strictSetInference = true
+strictParameterNoneValue = true
+reportUntypedFunctionDecorator = "error"
+reportUntypedClassDecorator = "error"
+reportUntypedBaseClass = "error"
+reportUnusedClass = "error"
+reportUnnecessaryCast = "error"
+reportUnnecessaryComparison = "error"
+reportUnnecessaryContains = "error"
+reportUnnecessaryIsInstance = "error"
+reportImportCycles = "error"
+reportDuplicateImport = "error"
