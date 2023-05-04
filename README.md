@@ -6,5 +6,3 @@ Repository that contains the examples of a [Medium article](https://itnext.io/bl
 ![Creating a galaga clone using Python and PyGame](/arcade.jpg "Creating a galaga clone using Python and PyGame")
 
 ![Creating a galaga clone using Python and PyGame](/game.gif "Creating a galaga clone using Python and PyGame")
-
-test
