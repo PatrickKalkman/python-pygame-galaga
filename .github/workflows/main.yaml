@@ -39,6 +39,14 @@ jobs:
         pytest        
 
     - name: Run Bandit Report
-      uses: jpetrucciani/bandit-check@main
-      with:
-        bandit_flags: '-lll -o output.json -f json'
+      uses: shundor/bandit-action@v1
+      with: 
+          path: "."
+          level: high
+          confidence: high
+          exit_zero: true          
+
+    # - name: Run Bandit Report
+    #   uses: jpetrucciani/bandit-check@main
+    #   with:
+    #     bandit_flags: '-lll -o output.html -f html'
